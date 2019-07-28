@@ -36,7 +36,8 @@ namespace CRUD.Controllers
         {
             CRUDHelper.Create(Name, Age);
             //Retrieve();
-            Delete();
+            Update();
+            //Delete();
             return View();
         }
 
@@ -47,8 +48,10 @@ namespace CRUD.Controllers
             return View();
         }
 
-        public ActionResult Update()
+        public ActionResult Update(string Name = "Amy", int ChangeAge = 18)
         {
+            CRUDHelper.Update(Name, ChangeAge);
+            Retrieve();
             return View();
         }
 

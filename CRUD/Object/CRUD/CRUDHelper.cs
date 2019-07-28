@@ -62,10 +62,24 @@ namespace CRUD.Object.CRUD
             return List;
         }
 
-        public CRUDModel U()
+        public static void Update(string Name, int ChangeAge)
         {
-            CRUDModel CRUD = new CRUDModel();
-            return CRUD;
+            List<CRUDModel> List = new List<CRUDModel>();
+            using (SqlConnection conn = new SqlConnection(strConnString))
+            {
+                conn.Open();
+                SqlCommand scom = new SqlCommand("", conn);
+                scom.CommandText = @"
+                                        UPDATE [dbo].[Member]
+                                        SET Age = @ChangeAge
+                                        WHERE Name = @Name 
+                                    ";
+                scom.Parameters.Add("@Name", SqlDbType.NVarChar, 20);
+                scom.Parameters["@Name"].Value = Name;
+                scom.Parameters.Add("@ChangeAge", SqlDbType.Int, 4);
+                scom.Parameters["@ChangeAge"].Value = ChangeAge;
+                SqlDataReader sread = scom.ExecuteReader();
+            }
         }
 
         public static void Delete(string Name)
