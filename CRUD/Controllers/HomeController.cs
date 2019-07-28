@@ -40,9 +40,6 @@ namespace CRUD.Controllers
         public ActionResult Create(string Name = "NoData", int Age = 0)
         {
             CRUDHelper.Create(Name, Age);
-            //Retrieve();
-            //Update();
-            //Delete();
             return Json(JsonRequestBehavior.AllowGet);
         }
 
@@ -53,10 +50,9 @@ namespace CRUD.Controllers
             return Json(new { data = List }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Update(string Name = "Amy", int ChangeAge = 18)
+        public ActionResult Update(string Name = "NoData", int ChangeAge = 100)
         {
             CRUDHelper.Update(Name, ChangeAge);
-            //Retrieve();
             return Json(JsonRequestBehavior.AllowGet);
         }
 

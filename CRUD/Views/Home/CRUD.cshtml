@@ -33,24 +33,20 @@
 <script>
     function Create() {
         $.ajax({
-            url: '@Url.Action("Retrieve", "HOME")',
-            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            url: '@Url.Action("Create", "HOME")',
+            data: { Name: $("input[name='CreateName']").val(), Age: $("input[name='CreateAge']").val() },
             type: 'POST',
             async: false,
             cache: false,
-            success: function (data) {
-                $("#CRUD").empty();
-                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
-                $.each(data.data, function (i, item) {
-                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
-                });
+            success: function () {
+                alert("資料新增");
+                Retrieve()
             }
         });
     }
     function Retrieve() {
         $.ajax({
             url: '@Url.Action("Retrieve", "HOME")',
-            data: { strScreeningID: '@ViewBag.strScreeningID' },
             type: 'POST',
             async: false,
             cache: false,
@@ -65,33 +61,27 @@
     }
     function Update() {
         $.ajax({
-            url: '@Url.Action("Retrieve", "HOME")',
-            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            url: '@Url.Action("Update", "HOME")',
+            data: { Name: $("input[name='UpdateName']").val(), ChangeAge: $("input[name='UpdateAge']").val() },
             type: 'POST',
             async: false,
             cache: false,
-            success: function (data) {
-                $("#CRUD").empty();
-                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
-                $.each(data.data, function (i, item) {
-                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
-                });
+            success: function () {
+                alert("資料更新");
+                Retrieve()
             }
         });
     }
     function Delete() {
         $.ajax({
-            url: '@Url.Action("Retrieve", "HOME")',
-            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            url: '@Url.Action("Delete", "HOME")',
+            data: { Name: $("input[name='DeleteName']").val()},
             type: 'POST',
             async: false,
             cache: false,
-            success: function (data) {
-                $("#CRUD").empty();
-                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
-                $.each(data.data, function (i, item) {
-                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
-                });
+            success: function () {
+                alert("資料刪除");
+                Retrieve()
             }
         });
     }
