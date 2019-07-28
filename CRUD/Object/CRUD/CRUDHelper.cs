@@ -36,6 +36,29 @@ namespace CRUD.Object.CRUD
         public static List<CRUDModel> Retrieve()
         {
             List<CRUDModel> List = new List<CRUDModel>();
+            using (SqlConnection conn = new SqlConnection(strConnString))
+            {
+                conn.Open();
+                SqlCommand scom = new SqlCommand("", conn);
+                scom.CommandText = @"
+                                        select Id, Name, Age
+                                        from [dbo].[Member]
+                                    ";
+                SqlDataReader sread = scom.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(sread);
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        CRUDModel temp = new CRUDModel();
+                        temp.Id = dt.Rows[i]["Id"].ToString();
+                        temp.Name = dt.Rows[i]["Name"].ToString();
+                        temp.Age = int.Parse(dt.Rows[i]["Age"].ToString());
+                        List.Add(temp);
+                    }
+                }
+            }
             return List;
         }
 
@@ -45,10 +68,21 @@ namespace CRUD.Object.CRUD
             return CRUD;
         }
 
-        public CRUDModel D()
+        public static void Delete(string Name)
         {
-            CRUDModel CRUD = new CRUDModel();
-            return CRUD;
+            List<CRUDModel> List = new List<CRUDModel>();
+            using (SqlConnection conn = new SqlConnection(strConnString))
+            {
+                conn.Open();
+                SqlCommand scom = new SqlCommand("", conn);
+                scom.CommandText = @"
+                                        DELETE FROM [dbo].[Member]
+                                        WHERE Name = @Name 
+                                    ";
+                scom.Parameters.Add("@Name", SqlDbType.NVarChar, 20);
+                scom.Parameters["@Name"].Value = Name;
+                SqlDataReader sread = scom.ExecuteReader();
+            }
         }
     }
 }

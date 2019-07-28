@@ -35,6 +35,8 @@ namespace CRUD.Controllers
         public ActionResult Create(string Name = "NoData", int Age = 0)
         {
             CRUDHelper.Create(Name, Age);
+            //Retrieve();
+            Delete();
             return View();
         }
 
@@ -50,8 +52,12 @@ namespace CRUD.Controllers
             return View();
         }
 
-        public  ActionResult Delete()
+        public  ActionResult Delete(string Name = "NoData")
         {
+            Retrieve();
+            Name = "Bob";
+            CRUDHelper.Delete(Name);
+            Retrieve();
             return View();
         }
     }
