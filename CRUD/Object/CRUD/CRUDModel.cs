@@ -7,6 +7,7 @@ namespace CRUD.Object.CRUD
 {
     public class CRUDModel
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
     }
