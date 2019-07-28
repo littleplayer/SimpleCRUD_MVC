@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRUD.Object.CRUD;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -24,6 +25,13 @@ namespace CRUD.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult CRUD(string action)
+        {
+            CRUDModel CRUD = new CRUDModel();
+            CRUD = CRUDHelper.CRUD(action);
             return View();
         }
     }
