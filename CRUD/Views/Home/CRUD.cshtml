@@ -4,4 +4,96 @@
 }
 
 <h2>CRUD</h2>
+<div>
+    <form>
+        新增人員名稱：<input type="text" name="CreateName"><br>
+        新增人員年齡：<input type="text" name="CreateAge">
+    </form>
+    <button id="CreateBtn" onclick="Create()" type="button">Create</button><br>
+    <hr size="20" align="center" width="100%">
+    <button id="RetrieveBtn" onclick="Retrieve()" type="button">Retrieve</button><br>
+    <hr size="20" align="center" width="100%">
+    <form>
+        欲更新人員名稱：<input type="text" name="UpdateName"><br>
+        人員年齡更新為：<input type="text" name="UpdateAge">
+    </form>
+    <button id="UpdateBtn" onclick="Update()" type="button">Update</button><br>
+    <hr size="20" align="center" width="100%">
+    <form>
+        欲刪除人員名稱：<input type="text" name="DeleteName">
+    </form>
+    <button id="DeleteBtn" onclick="Delete()" type="button">Delete</button><br>
+</div>
+<div>
+    <br />
+    <table id="CRUD" style="border:3px #cccccc solid;" cellpadding="10" border='1'>
+
+    <table>
+</div>
+<script>
+    function Create() {
+        $.ajax({
+            url: '@Url.Action("Retrieve", "HOME")',
+            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            type: 'POST',
+            async: false,
+            cache: false,
+            success: function (data) {
+                $("#CRUD").empty();
+                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
+                $.each(data.data, function (i, item) {
+                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
+                });
+            }
+        });
+    }
+    function Retrieve() {
+        $.ajax({
+            url: '@Url.Action("Retrieve", "HOME")',
+            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            type: 'POST',
+            async: false,
+            cache: false,
+            success: function (data) {
+                $("#CRUD").empty();
+                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
+                $.each(data.data, function (i, item) {
+                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
+                });
+            }
+        });
+    }
+    function Update() {
+        $.ajax({
+            url: '@Url.Action("Retrieve", "HOME")',
+            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            type: 'POST',
+            async: false,
+            cache: false,
+            success: function (data) {
+                $("#CRUD").empty();
+                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
+                $.each(data.data, function (i, item) {
+                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
+                });
+            }
+        });
+    }
+    function Delete() {
+        $.ajax({
+            url: '@Url.Action("Retrieve", "HOME")',
+            data: { strScreeningID: '@ViewBag.strScreeningID' },
+            type: 'POST',
+            async: false,
+            cache: false,
+            success: function (data) {
+                $("#CRUD").empty();
+                $("#CRUD").append('<tr><th>ID</th><th>NAME</th><th>AGE</tr>');
+                $.each(data.data, function (i, item) {
+                    $("#CRUD").append('<tr><th>' + item.Id + '</th><th>' + item.Name + '</th><th>' + item.Age + '</tr>' );
+                });
+            }
+        });
+    }
+</script>
 

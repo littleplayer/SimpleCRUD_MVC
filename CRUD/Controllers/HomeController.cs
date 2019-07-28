@@ -32,33 +32,38 @@ namespace CRUD.Controllers
             return View();
         }
 
+        public ActionResult CRUD()
+        {
+            return View();
+        }
+
         public ActionResult Create(string Name = "NoData", int Age = 0)
         {
             CRUDHelper.Create(Name, Age);
             //Retrieve();
-            Update();
+            //Update();
             //Delete();
-            return View();
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Retrieve()
         {
             List<CRUDModel> List = new List<CRUDModel>();
             List = CRUDHelper.Retrieve();
-            return View();
+            return Json(new { data = List }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update(string Name = "Amy", int ChangeAge = 18)
         {
             CRUDHelper.Update(Name, ChangeAge);
-            Retrieve();
-            return View();
+            //Retrieve();
+            return Json(JsonRequestBehavior.AllowGet);
         }
 
         public  ActionResult Delete(string Name = "NoData")
         {
             CRUDHelper.Delete(Name);
-            return View();
+            return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }
