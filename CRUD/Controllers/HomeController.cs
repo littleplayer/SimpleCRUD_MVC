@@ -54,10 +54,7 @@ namespace CRUD.Controllers
 
         public  ActionResult Delete(string Name = "NoData")
         {
-            Retrieve();
-            Name = "Bob";
             CRUDHelper.Delete(Name);
-            Retrieve();
             return View();
         }
     }
